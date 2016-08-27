@@ -17,6 +17,8 @@
 		189216BB1D6FF04F00C7831E /* LHUITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189216B41D6FF04F00C7831E /* LHUITableViewCell.m */; };
 		189216BC1D6FF04F00C7831E /* LHUITableViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189216B61D6FF04F00C7831E /* LHUITableViewViewController.m */; };
 		189216BD1D6FF04F00C7831E /* NSObject+LHKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 189216B91D6FF04F00C7831E /* NSObject+LHKVO.m */; };
+		2453C71A1D71D507002CF006 /* LHTest3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2453C7191D71D507002CF006 /* LHTest3ViewController.m */; };
+		2453C71D1D71D544002CF006 /* LHTest3View.m in Sources */ = {isa = PBXBuildFile; fileRef = 2453C71C1D71D544002CF006 /* LHTest3View.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,10 @@
 		189216B61D6FF04F00C7831E /* LHUITableViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHUITableViewViewController.m; sourceTree = "<group>"; };
 		189216B81D6FF04F00C7831E /* NSObject+LHKVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LHKVO.h"; sourceTree = "<group>"; };
 		189216B91D6FF04F00C7831E /* NSObject+LHKVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LHKVO.m"; sourceTree = "<group>"; };
+		2453C7181D71D507002CF006 /* LHTest3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LHTest3ViewController.h; path = test_3/LHTest3ViewController.h; sourceTree = "<group>"; };
+		2453C7191D71D507002CF006 /* LHTest3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LHTest3ViewController.m; path = test_3/LHTest3ViewController.m; sourceTree = "<group>"; };
+		2453C71B1D71D544002CF006 /* LHTest3View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LHTest3View.h; path = test_3/LHTest3View.h; sourceTree = "<group>"; };
+		2453C71C1D71D544002CF006 /* LHTest3View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LHTest3View.m; path = test_3/LHTest3View.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,10 @@
 			children = (
 				189216B11D6FF04F00C7831E /* CellModel.h */,
 				189216B21D6FF04F00C7831E /* CellModel.m */,
+				2453C71B1D71D544002CF006 /* LHTest3View.h */,
+				2453C71C1D71D544002CF006 /* LHTest3View.m */,
+				2453C7181D71D507002CF006 /* LHTest3ViewController.h */,
+				2453C7191D71D507002CF006 /* LHTest3ViewController.m */,
 				189216B31D6FF04F00C7831E /* LHUITableViewCell.h */,
 				189216B41D6FF04F00C7831E /* LHUITableViewCell.m */,
 				189216B51D6FF04F00C7831E /* LHUITableViewViewController.h */,
@@ -185,12 +195,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2453C71A1D71D507002CF006 /* LHTest3ViewController.m in Sources */,
 				189216BD1D6FF04F00C7831E /* NSObject+LHKVO.m in Sources */,
 				189216BC1D6FF04F00C7831E /* LHUITableViewViewController.m in Sources */,
 				189216A11D6FF00E00C7831E /* ViewController.m in Sources */,
 				1892169E1D6FF00E00C7831E /* AppDelegate.m in Sources */,
 				1892169B1D6FF00E00C7831E /* main.m in Sources */,
 				189216BA1D6FF04F00C7831E /* CellModel.m in Sources */,
+				2453C71D1D71D544002CF006 /* LHTest3View.m in Sources */,
 				189216BB1D6FF04F00C7831E /* LHUITableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,6 +358,7 @@
 				189216AF1D6FF00E00C7831E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

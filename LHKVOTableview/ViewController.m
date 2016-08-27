@@ -9,8 +9,10 @@
 #import "ViewController.h"
 #import "NSObject+LHKVO.h"
 #import "LHUITableViewViewController.h"
-@interface ViewController ()
-
+#import "LHTest3ViewController.h"
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic,strong) NSMutableArray*muarray;
+@property (nonatomic,strong) UITableView *lhtableView;
 @end
 
 @implementation LHObservedObject
@@ -22,21 +24,55 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIButton*btn = [[UIButton alloc]initWithFrame:CGRectMake(100, 200, 100, 50)];
-    btn.backgroundColor = [UIColor brownColor];
-    [btn setTitle:@"push" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
     
-}
--(void)push{
-    LHUITableViewViewController*viewController = [[LHUITableViewViewController alloc]init];
-    [self.navigationController pushViewController:viewController animated:YES];
+    self.muarray = [NSMutableArray array];
+    for (NSInteger i = 1; i <= 3 ; i++) {
+        [self.muarray addObject:[NSString stringWithFormat:@"test_%ld",(long)i]];
+    }
+    
+    self.lhtableView = [[UITableView alloc]initWithFrame:self.view.bounds];
+    self.lhtableView.delegate = self;
+    self.lhtableView.dataSource = self;
+    [self.view addSubview:self.lhtableView];
+    [self.lhtableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"LHUITableViewCell"];
 }
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    LHObservedObject*object = [[LHObservedObject alloc]init];
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell*cell = [tableView dequeueReusableCellWithIdentifier:@"LHUITableViewCell" forIndexPath:indexPath];
+    cell.textLabel.text = [self.muarray objectAtIndex:indexPath.row];
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50;
+}
+
+#pragma mark- tableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    NSString *function = [self.muarray objectAtIndex:indexPath.row];
+    
+    SEL action =  NSSelectorFromString(function);
+    if ([self respondsToSelector:action]) {
+        [self performSelector:action];
+    }
+}
+
+-(void)test_1{
+    LHObservedObject*object = [[LHObservedObject alloc]init];
     __weak __typeof(LHObservedObject*)weakobject= object;
     
     [object LHaddObserver:@"num" withBlock:^{
@@ -53,4 +89,16 @@
     object.observedNum = @(1);
     object.printBlock = ^(){};
 }
+
+-(void)test_2{
+    LHUITableViewViewController*viewController = [[LHUITableViewViewController alloc]init];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+-(void)test_3{
+    LHTest3ViewController*viewController = [[LHTest3ViewController alloc]init];
+    [self.navigationController pushViewController:viewController animated:YES];
+
+}
+
 @end

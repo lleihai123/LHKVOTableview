@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
-
-
 @end
 
 @interface LHObservedObject : NSObject
