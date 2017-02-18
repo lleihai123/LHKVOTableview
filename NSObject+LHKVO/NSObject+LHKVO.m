@@ -41,13 +41,19 @@
 }
 
 -(void)LHaddObserver: (NSString *)key withBlock: (LHHandler)observedHandler{
-    NSMutableDictionary*dict =  [[NSObjectLHKVOManage sharedManager].kvoMumdict objectForKey:objectAdress];
-    if (!dict) {
-        dict = [NSMutableDictionary new];
+    @synchronized(self){
+        NSMutableDictionary*dict =  [[NSObjectLHKVOManage sharedManager].kvoMumdict objectForKey:objectAdress];
+        if (!dict) {
+            dict = [NSMutableDictionary new];
+        }else{
+            if ([dict objectForKey:key]) {
+                [self LHRemoveObserver:key];
+            }
+        }
+        [dict setObject:observedHandler forKey:key];
+        [self addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
+        [[NSObjectLHKVOManage sharedManager].kvoMumdict setObject:dict forKey:objectAdress];
     }
-    [dict setObject:observedHandler forKey:key];
-    [self addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
-    [[NSObjectLHKVOManage sharedManager].kvoMumdict setObject:dict forKey:objectAdress];
 }
 
 
@@ -72,7 +78,7 @@
     @catch (NSException *exception) {
         NSLog(@"多次删除了");
     }
-
+    
 }
 
 - (void)LHRemoveAllObserver{
@@ -89,13 +95,15 @@
 -(void)sd_dealloc{
     NSMutableDictionary*dict =  [[NSObjectLHKVOManage sharedManager].kvoMumdict objectForKey:objectAdress];
     if (dict) {
-        NSArray*keys = [dict allKeys];
-        for (NSString*key in keys) {
-            [self LHRemoveObserver:key];
-            NSLog(@"dealloc_key:%@",key);
+        [[NSObjectLHKVOManage sharedManager].kvoMumdict  removeObjectForKey:objectAdress];
+        @synchronized(self){
+            NSArray*keys = [dict allKeys];
+            for (NSString*key in keys) {
+                [self LHRemoveObserver:key];
+                NSLog(@"dealloc_key:%@",key);
+            }
         }
     }
-    [[NSObjectLHKVOManage sharedManager].kvoMumdict  removeObjectForKey:objectAdress];
     [self sd_dealloc];
 }
 @end
